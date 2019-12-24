@@ -15,19 +15,17 @@
 	// define a Common JS module that relies on 'leaflet'
 	} else if (typeof exports === 'object') {
 		module.exports = factory(require('leaflet'));
-	}
-
 	// attach your plugin to the global 'L' variable
-	if (typeof window !== 'undefined' && window.L) {
+	} else if (typeof window !== 'undefined' && window.L) {
 		window.LeafletLabel = factory(L);
 	}
 }(function (L) {
 L.labelVersion = '0.2.4';
 
 
-var LeafletLabel = L.Class.extend({
+var LeafletLabel = L.Layer.extend({
 
-	includes: L.Mixin.Events,
+	includes: L.Evented,
 
 	options: {
 		className: '',
@@ -275,7 +273,7 @@ var LeafletLabel = L.Class.extend({
 		}
 	}
 });
-
+L.Label = LeafletLabel
 
 /*global LeafletLabel */
 
